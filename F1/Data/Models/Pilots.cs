@@ -5,8 +5,6 @@ public class Pilots {
 
     public Countries? Nationality { get; set; }
 
-    public int Nationality_Id { get; set; }
-
     public virtual ICollection<PilotsSeasons>? Seasons { get; set; }
 
     public int Championships { get; set; }

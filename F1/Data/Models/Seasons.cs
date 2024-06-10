@@ -7,7 +7,5 @@ public class Seasons {
 
     public Pilots? Season_Champion { get; set; }
 
-    public int Season_Champion_Id { get; set; }
-
     public virtual ICollection<PilotsSeasons>? Pilots { get; set; }
 }

@@ -3,9 +3,5 @@ public class PilotsSeasons {
 
      public Pilots? Pilot { get; set; }
 
-    public int Pilot_Id { get; set; }
-
     public Seasons? Season { get; set; }
-
-    public int Season_Id { get; set; }
 }
