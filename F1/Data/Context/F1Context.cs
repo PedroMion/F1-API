@@ -6,7 +6,11 @@ public partial class F1Context : DbContext
     public DbSet<Pilots> Pilots { get; set; }
     public DbSet<Countries> Countries { get; set; }
     public DbSet<Seasons> Seasons { get; set; }
+    public DbSet<Teams> Teams { get; set; }
+    public DbSet<Circuits> Circuits { get; set; }
+    public DbSet<Races> Races { get; set; }
     public DbSet<PilotsSeasons> PilotsSeasons { get; set; }
+    public DbSet<PilotsTeams> PilotsTeams { get; set; }
 
     public F1Context()
     {
