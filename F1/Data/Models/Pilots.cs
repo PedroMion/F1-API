@@ -7,6 +7,8 @@ public class Pilots {
 
     public virtual ICollection<PilotsSeasons>? Seasons { get; set; }
 
+    public virtual ICollection<PilotsTeams>? Teams { get; set; }
+
     public int Championships { get; set; }
 
     public int Race_Entries { get; set; }
@@ -28,14 +30,6 @@ public class Pilots {
     public string? Decade { get; set; }
 
     public double Pole_Rate { get; set; }
-
-    public double Start_Rate { get; set; }
-
-    public double Win_Rate { get; set; }
-
-    public double Podium_Rate { get; set; }
-
-    public double FastLap_Rate { get; set; }
 
     public double Points_Per_Entry { get; set; }
 
