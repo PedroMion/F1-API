@@ -11,6 +11,7 @@ public partial class F1Context : DbContext
     public DbSet<Races> Races { get; set; }
     public DbSet<PilotsSeasons> PilotsSeasons { get; set; }
     public DbSet<PilotsTeams> PilotsTeams { get; set; }
+    public DbSet<Questions> Questions { get; set; }
 
     public F1Context()
     {

@@ -36,4 +36,8 @@ public class Pilots {
     public string? Years_Active { get; set; }
 
     public bool Champion { get; set; }
+
+    public bool F2_Champion { get; set; }
+
+    public bool Grand_Chelem { get; set; }
 }
