@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using F1.Constants;
-using Microsoft.VisualBasic;
+using F1.Services.Interfaces;
+using F1.Services;
+using F1.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<F1Context>(options => {
     options.UseSqlServer(Private.SQL_CONNECTION);
 });
+
+builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IDAL, DAL>();
 
 var app = builder.Build();
 
