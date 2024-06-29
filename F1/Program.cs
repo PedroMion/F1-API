@@ -18,8 +18,8 @@ builder.Services.AddDbContext<F1Context>(options => {
     options.UseSqlServer(Private.SQL_CONNECTION);
 });
 
-builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IDAL, DAL>();
+builder.Services.AddScoped<IGameService, GameService>();
 
 var app = builder.Build();
 
