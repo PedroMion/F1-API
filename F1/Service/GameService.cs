@@ -22,6 +22,7 @@ namespace F1.Services
             if(questions.Count > 0)
             {
                 game.Question = questions.FirstOrDefault().Question;
+                game.Responses = _dal.GetResponsesFromQuestionId(questions.FirstOrDefault().Id);
             }
             
             return Task.FromResult(game);

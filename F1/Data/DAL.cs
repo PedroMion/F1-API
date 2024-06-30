@@ -1,3 +1,7 @@
+using System.Runtime.CompilerServices;
+using F1.Data.DTO;
+using Microsoft.EntityFrameworkCore;
+
 namespace F1.Data
 {
     public class DAL() : IDAL
@@ -14,6 +18,20 @@ namespace F1.Data
             List<Questions> result = _F1Context.Questions.ToList();
 
             return result;
+        }
+
+        public List<String?>? GetResponsesFromQuestionId(int questionId)
+        {
+            var question = _F1Context.Questions.Find(questionId);
+
+            if(question != null && question.Query != null)
+            {
+                var responses = _F1Context.Pilots.FromSql(FormattableStringFactory.Create(question.Query));
+
+                return responses.Select(resp => resp.Name).ToList();
+            }
+
+            return null;
         }
     }
 }
