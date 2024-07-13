@@ -6,6 +6,7 @@ using F1.Data.DTO;
 using F1.Services;
 using F1.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,9 +24,13 @@ namespace F1.Controllers
         }
 
         [HttpGet()]
-        public async Task<ActionResult<GameDto>> GetTodayGame()
+        public async Task<ActionResult<GameDto>> GetTodayGame([BindRequired] String? date)
         {
-            var game = await _service.GetGameByDate();
+            if (date == null) {
+                return BadRequest("Missing required parameter date");
+            }
+            
+            var game = await _service.GetGameByDate(date);
 
             if (game == null) {
                 return NoContent();

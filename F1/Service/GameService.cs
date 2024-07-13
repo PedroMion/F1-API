@@ -13,17 +13,28 @@ namespace F1.Services
             _dal = dal;
         }
 
-        public Task<GameDto?> GetGameByDate()
+        private GameDto GameToGameDto(Games game)
         {
-            List<Questions> questions = _dal.GetAllQuestions();
+            return new GameDto();
+        }
 
-            GameDto? game = new GameDto();
+        private GameDto? GetGameIfExists(String dateStr)
+        {
+            var date = DateTime.Parse(dateStr);
 
-            if(questions.Count > 0)
+            var game = _dal.GetGameByDate(date);
+
+            if (game != null)
             {
-                game.Question = questions.FirstOrDefault().Question;
-                game.Responses = _dal.GetResponsesFromQuestionId(questions.FirstOrDefault().Id);
+                return GameToGameDto(game);
             }
+
+            return null;
+        }
+
+        public Task<GameDto?> GetGameByDate(String dateStr)
+        {
+            GameDto? game = GetGameIfExists(dateStr);
             
             return Task.FromResult(game);
         }

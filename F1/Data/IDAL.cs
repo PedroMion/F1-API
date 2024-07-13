@@ -5,5 +5,7 @@ namespace F1.Data
         public List<Questions> GetAllQuestions();
 
         public List<String?>? GetResponsesFromQuestionId(int questionId);
+
+        public Games? GetGameByDate(DateTime date);
     }
 }

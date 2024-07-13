@@ -33,5 +33,17 @@ namespace F1.Data
 
             return null;
         }
+
+        public Games? GetGameByDate(DateTime date)
+        {
+            List<Games> game = _F1Context.Games.Select(game => game).Where(game => game.ReferenceDate == date).ToList();
+
+            if(game != null && game.Count == 1)
+            {
+                return game.FirstOrDefault();
+            }
+
+            return null;
+        }
     }
 }
