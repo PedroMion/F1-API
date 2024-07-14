@@ -36,7 +36,15 @@ namespace F1.Data
 
         public Games? GetGameByDate(DateTime date)
         {
-            List<Games> game = _F1Context.Games.Select(game => game).Where(game => game.ReferenceDate == date).ToList();
+            List<Games> game = _F1Context.Games
+                                            .Include(g => g.Question1)
+                                            .Include(g => g.Question2)
+                                            .Include(g => g.Question3)
+                                            .Include(g => g.Question4)
+                                            .Include(g => g.Question5)
+                                            .Include(g => g.Question6)
+                                            .Where(g => g.ReferenceDate == date)
+                                            .ToList();
 
             if(game != null && game.Count == 1)
             {

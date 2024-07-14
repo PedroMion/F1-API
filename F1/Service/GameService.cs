@@ -13,9 +13,21 @@ namespace F1.Services
             _dal = dal;
         }
 
-        private GameDto GameToGameDto(Games game)
+        private GameDto? GameToGameDto(Games game)
         {
-            return new GameDto();
+            List<Questions> questions =
+            [
+                game.Question1,
+                game.Question2,
+                game.Question3,
+                game.Question4,
+                game.Question5,
+                game.Question6,
+            ];
+
+            List<List<String?>?> responses = GetResponsesFromQuestions(questions);
+
+            return MapGameToGameDto(questions, responses);
         }
 
         private GameDto? MapGameToGameDto(List<Questions> selectedQuestions, List<List<String?>?> responsesForQuestions) {
@@ -157,7 +169,7 @@ namespace F1.Services
 
         public bool InvalidDate(String? date)
         {
-            return date == null || DateTime.Parse(date).CompareTo(Constants.Constants.DATE_LIMIT) >= 0;
+            return date == null || DateTime.Parse(date).CompareTo(Constants.Constants.DATE_LIMIT) < 0;
         }
 
         public Task<GameDto?> GetGameByDate(String dateStr)
