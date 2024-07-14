@@ -1,3 +1,5 @@
+using F1.Migrations;
+
 namespace F1.Data 
 {
     public interface IDAL
@@ -7,5 +9,7 @@ namespace F1.Data
         public List<String?>? GetResponsesFromQuestionId(int questionId);
 
         public Games? GetGameByDate(DateTime date);
+
+        public void SaveGame(Games game);
     }
 }

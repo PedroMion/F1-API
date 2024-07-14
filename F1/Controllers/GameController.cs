@@ -26,8 +26,8 @@ namespace F1.Controllers
         [HttpGet()]
         public async Task<ActionResult<GameDto>> GetTodayGame([BindRequired] String? date)
         {
-            if (date == null) {
-                return BadRequest("Missing required parameter date");
+            if (_service.InvalidDate(date)) {
+                return BadRequest("Invalid date parameter");
             }
             
             var game = await _service.GetGameByDate(date);

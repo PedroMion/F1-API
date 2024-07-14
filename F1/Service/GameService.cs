@@ -28,15 +28,15 @@ namespace F1.Services
             gameDto.QuestionB = selectedQuestions[4].Question;
             gameDto.QuestionC = selectedQuestions[5].Question;
 
-            gameDto.Square1A = responsesForQuestions[0].Union(responsesForQuestions[3]).ToList();
-            gameDto.Square1B = responsesForQuestions[0].Union(responsesForQuestions[4]).ToList();
-            gameDto.Square1C = responsesForQuestions[0].Union(responsesForQuestions[5]).ToList();
-            gameDto.Square2A = responsesForQuestions[1].Union(responsesForQuestions[3]).ToList();
-            gameDto.Square2B = responsesForQuestions[1].Union(responsesForQuestions[4]).ToList();
-            gameDto.Square2C = responsesForQuestions[1].Union(responsesForQuestions[5]).ToList();
-            gameDto.Square3A = responsesForQuestions[2].Union(responsesForQuestions[3]).ToList();
-            gameDto.Square3B = responsesForQuestions[2].Union(responsesForQuestions[4]).ToList();
-            gameDto.Square3C = responsesForQuestions[2].Union(responsesForQuestions[5]).ToList();
+            gameDto.Square1A = responsesForQuestions[0].Intersect(responsesForQuestions[3]).ToList();
+            gameDto.Square1B = responsesForQuestions[0].Intersect(responsesForQuestions[4]).ToList();
+            gameDto.Square1C = responsesForQuestions[0].Intersect(responsesForQuestions[5]).ToList();
+            gameDto.Square2A = responsesForQuestions[1].Intersect(responsesForQuestions[3]).ToList();
+            gameDto.Square2B = responsesForQuestions[1].Intersect(responsesForQuestions[4]).ToList();
+            gameDto.Square2C = responsesForQuestions[1].Intersect(responsesForQuestions[5]).ToList();
+            gameDto.Square3A = responsesForQuestions[2].Intersect(responsesForQuestions[3]).ToList();
+            gameDto.Square3B = responsesForQuestions[2].Intersect(responsesForQuestions[4]).ToList();
+            gameDto.Square3C = responsesForQuestions[2].Intersect(responsesForQuestions[5]).ToList();
 
             return gameDto;
         }
@@ -74,7 +74,7 @@ namespace F1.Services
 
         private bool VerifyValidSquare(List<String?>? rowResponses, List<String?>? columnResponses)
         {
-            List<String?>? result = rowResponses.Union(columnResponses).ToList();
+            List<String?>? result = rowResponses.Intersect(columnResponses).ToList();
 
             return result.Count >= 3 && result.Count <= 30;
         }
@@ -100,7 +100,23 @@ namespace F1.Services
             return MapGameToGameDto(selectedQuestions, responsesForQuestions);
         }
 
-        private GameDto? GenerateNewGame(String dateStr)
+        private void SaveGame(List<Questions> selectedQuestions, DateTime date)
+        {
+            var game = new Games
+            {
+                Question1 = selectedQuestions[0],
+                Question2 = selectedQuestions[1],
+                Question3 = selectedQuestions[2],
+                Question4 = selectedQuestions[3],
+                Question5 = selectedQuestions[4],
+                Question6 = selectedQuestions[5],
+                ReferenceDate = date
+            };
+
+            _dal.SaveGame(game);
+        }
+
+        private GameDto? GenerateNewGame(DateTime date)
         {
             GameDto? newGame = null;
             bool invalidGame = true;
@@ -117,6 +133,8 @@ namespace F1.Services
                 if(newGame != null)
                 {
                     invalidGame = false;
+
+                    SaveGame(selectedQuestions, date);
                 }
             }
 
@@ -134,7 +152,12 @@ namespace F1.Services
                 return GameToGameDto(game);
             }
 
-            return GenerateNewGame(dateStr);
+            return GenerateNewGame(date);
+        }
+
+        public bool InvalidDate(String? date)
+        {
+            return date == null || DateTime.Parse(date).CompareTo(Constants.Constants.DATE_LIMIT) >= 0;
         }
 
         public Task<GameDto?> GetGameByDate(String dateStr)
