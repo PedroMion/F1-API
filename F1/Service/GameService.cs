@@ -18,6 +18,29 @@ namespace F1.Services
             return new GameDto();
         }
 
+        private GameDto? MapGameToGameDto(List<Questions> selectedQuestions, List<List<String?>?> responsesForQuestions) {
+            var gameDto = new GameDto();
+
+            gameDto.Question1 = selectedQuestions[0].Question;
+            gameDto.Question2 = selectedQuestions[1].Question;
+            gameDto.Question3 = selectedQuestions[2].Question;
+            gameDto.QuestionA = selectedQuestions[3].Question;
+            gameDto.QuestionB = selectedQuestions[4].Question;
+            gameDto.QuestionC = selectedQuestions[5].Question;
+
+            gameDto.Square1A = responsesForQuestions[0].Union(responsesForQuestions[3]).ToList();
+            gameDto.Square1B = responsesForQuestions[0].Union(responsesForQuestions[4]).ToList();
+            gameDto.Square1C = responsesForQuestions[0].Union(responsesForQuestions[5]).ToList();
+            gameDto.Square2A = responsesForQuestions[1].Union(responsesForQuestions[3]).ToList();
+            gameDto.Square2B = responsesForQuestions[1].Union(responsesForQuestions[4]).ToList();
+            gameDto.Square2C = responsesForQuestions[1].Union(responsesForQuestions[5]).ToList();
+            gameDto.Square3A = responsesForQuestions[2].Union(responsesForQuestions[3]).ToList();
+            gameDto.Square3B = responsesForQuestions[2].Union(responsesForQuestions[4]).ToList();
+            gameDto.Square3C = responsesForQuestions[2].Union(responsesForQuestions[5]).ToList();
+
+            return gameDto;
+        }
+
         private List<Questions> GetRandomQuestions(List<Questions> allQuestions)
         {
             List<Questions> result = new List<Questions>();
@@ -49,6 +72,13 @@ namespace F1.Services
             return responsesForQuestions;
         }
 
+        private bool VerifyValidSquare(List<String?>? rowResponses, List<String?>? columnResponses)
+        {
+            List<String?>? result = rowResponses.Union(columnResponses).ToList();
+
+            return result.Count >= 3 && result.Count <= 30;
+        }
+
         private GameDto? GameFromQuestionsIfValid(List<Questions> selectedQuestions)
         {
             List<List<String?>?> responsesForQuestions = GetResponsesFromQuestions(selectedQuestions);
@@ -59,10 +89,15 @@ namespace F1.Services
                 for(int j = 3; j < 6; j++)
                 {
                     List<String?>? columnResponses = responsesForQuestions[j];
+
+                    if(!VerifyValidSquare(lineResponses, columnResponses))
+                    {
+                        return null;
+                    }
                 }
             }
 
-            return new GameDto();
+            return MapGameToGameDto(selectedQuestions, responsesForQuestions);
         }
 
         private GameDto? GenerateNewGame(String dateStr)
