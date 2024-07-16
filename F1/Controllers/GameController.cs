@@ -38,5 +38,17 @@ namespace F1.Controllers
 
             return Ok(game);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GameDto>> GetGameById([BindRequired] int id)
+        {
+            GameDto? game = await _service.GetGameById(id);
+
+            if (game == null) {
+                return BadRequest("Invalid ID");
+            }
+
+            return Ok(game);
+        }
     } 
 }

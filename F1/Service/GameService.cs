@@ -178,5 +178,16 @@ namespace F1.Services
             
             return Task.FromResult(game);
         }
+
+        public Task<GameDto?>? GetGameById(int id)
+        {
+            var game = _dal.GetGameById(id);
+
+            if (game != null) {
+                return Task.FromResult(GameToGameDto(game));
+            }
+
+            return null;
+        }
     }
 }

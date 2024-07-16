@@ -6,5 +6,7 @@ namespace F1.Services.Interfaces {
         public Task<GameDto?> GetGameByDate(String dateStr);
 
         public bool InvalidDate(String? date);
+
+        public Task<GameDto?>? GetGameById(int id);
     }
 }
