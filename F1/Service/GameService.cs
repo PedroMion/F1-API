@@ -169,7 +169,16 @@ namespace F1.Services
 
         public bool InvalidDate(String? date)
         {
-            return date == null || DateTime.Parse(date).CompareTo(Constants.Constants.DATE_LIMIT) < 0;
+            if(date == null) {
+                return false;
+            }
+
+            DateTime currentDate = DateTime.Now;
+            DateTime nextDate = currentDate.AddDays(1);
+            DateTime previousDate = currentDate.AddDays(-1);
+            DateTime referenceDate = DateTime.Parse(date);
+
+            return referenceDate.CompareTo(previousDate) < 0 || referenceDate.CompareTo(nextDate) > 0;
         }
 
         public Task<GameDto?> GetGameByDate(String dateStr)
