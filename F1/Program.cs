@@ -18,6 +18,15 @@ builder.Services.AddDbContext<F1Context>(options => {
     options.UseSqlServer(Private.SQL_CONNECTION);
 });
 
+builder.Services.AddCors(options =>
+{
+        options.AddPolicy(Private.CORS_POLICY,
+            builder => builder
+                .WithOrigins(Private.CORS_CONNECTION)
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+});
+
 builder.Services.AddScoped<IDAL, DAL>();
 builder.Services.AddScoped<IGameService, GameService>();
 
@@ -33,6 +42,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors(Private.CORS_POLICY);
 
 app.MapControllers();
 
