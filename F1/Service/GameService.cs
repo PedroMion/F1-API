@@ -13,7 +13,7 @@ namespace F1.Services
             _dal = dal;
         }
 
-        private GameDto? GameToGameDto(Games game)
+        private List<Questions> GetQuestionsFromGame(Games game)
         {
             List<Questions> questions =
             [
@@ -25,12 +25,28 @@ namespace F1.Services
                 game.Question6,
             ];
 
-            List<List<String?>?> responses = GetResponsesFromQuestions(questions);
-
-            return MapGameToGameDto(questions, responses);
+            return questions;
         }
 
-        private GameDto? MapGameToGameDto(List<Questions> selectedQuestions, List<List<String?>?> responsesForQuestions) {
+        private GameDto? GameToGameDto(Games game)
+        {
+            try
+            {
+                List<Questions> questions = GetQuestionsFromGame(game);
+                List<List<String?>?> responses = GetResponsesFromQuestions(questions);
+
+                GameDto? gameDto = MapQuestionsToGameDto(questions, responses);
+                gameDto.Id = game.Id;
+
+                return gameDto;
+            } 
+            catch(Exception)
+            {
+                return null;
+            }
+        }
+
+        private GameDto? MapQuestionsToGameDto(List<Questions> selectedQuestions, List<List<String?>?> responsesForQuestions) {
             var gameDto = new GameDto();
 
             gameDto.Question1 = selectedQuestions[0].Question;
@@ -109,10 +125,10 @@ namespace F1.Services
                 }
             }
 
-            return MapGameToGameDto(selectedQuestions, responsesForQuestions);
+            return MapQuestionsToGameDto(selectedQuestions, responsesForQuestions);
         }
 
-        private void SaveGame(List<Questions> selectedQuestions, DateTime date)
+        private Games SaveGame(List<Questions> selectedQuestions, DateTime date)
         {
             var game = new Games
             {
@@ -125,7 +141,7 @@ namespace F1.Services
                 ReferenceDate = date
             };
 
-            _dal.SaveGame(game);
+            return _dal.SaveGame(game);
         }
 
         private GameDto? GenerateNewGame(DateTime date)
@@ -146,7 +162,8 @@ namespace F1.Services
                 {
                     invalidGame = false;
 
-                    SaveGame(selectedQuestions, date);
+                    Games savedGame = SaveGame(selectedQuestions, date);
+                    newGame.Id = savedGame.Id;
                 }
             }
 

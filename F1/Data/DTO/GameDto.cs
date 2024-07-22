@@ -1,6 +1,8 @@
 namespace F1.Data.DTO;
 
 public class GameDto {
+    public int Id { get; set;}
+
     public String? Question1 { get; set; }
 
     public String? Question2 { get; set; }
