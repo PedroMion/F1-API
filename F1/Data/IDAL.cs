@@ -12,6 +12,6 @@ namespace F1.Data
 
         public Games? GetGameById(int id);
 
-        public void SaveGame(Games game);
+        public Games SaveGame(Games game);
     }
 }

@@ -68,10 +68,12 @@ namespace F1.Data
             return game;
         }
 
-        public void SaveGame(Games game)
+        public Games SaveGame(Games game)
         {
             _F1Context.Games.Add(game);
             _F1Context.SaveChanges();
+
+            return game;
         }
     }
 }
