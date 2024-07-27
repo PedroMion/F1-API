@@ -29,6 +29,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<IDAL, DAL>();
 builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IDataService, DataService>();
 
 var app = builder.Build();
 
