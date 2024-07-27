@@ -68,6 +68,21 @@ namespace F1.Data
             return game;
         }
 
+        public Games? GetMostRecentGame()
+        {
+            Games? game = _F1Context.Games
+                                        .Include(g => g.Question1)
+                                        .Include(g => g.Question2)
+                                        .Include(g => g.Question3)
+                                        .Include(g => g.Question4)
+                                        .Include(g => g.Question5)
+                                        .Include(g => g.Question6)
+                                        .OrderByDescending(game => game.Id)
+                                        .FirstOrDefault();
+
+            return game;
+        }
+
         public Games SaveGame(Games game)
         {
             _F1Context.Games.Add(game);

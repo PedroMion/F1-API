@@ -144,12 +144,45 @@ namespace F1.Services
             return _dal.SaveGame(game);
         }
 
+        private List<int> GetQuestionsIdsFromGame(Games? games) 
+        {
+            List<int> ids = new List<int>();
+            
+            if(games == null) {
+                return ids;
+            }
+
+            ids.Add(games.Question1.Id);
+            ids.Add(games.Question2.Id);
+            ids.Add(games.Question3.Id);
+            ids.Add(games.Question4.Id);
+            ids.Add(games.Question5.Id);
+            ids.Add(games.Question6.Id);
+
+            return ids;
+        }
+
+        private List<Questions> GetAllQuestionsFiltered()
+        {
+            List<Questions> allQuestions = _dal.GetAllQuestions();
+            
+            Games? latestGame = _dal.GetMostRecentGame();
+
+            if(latestGame != null) {
+                List<int> questionsIds = GetQuestionsIdsFromGame(latestGame);
+
+                allQuestions = allQuestions.Where(x => !questionsIds.Contains(x.Id)).ToList();
+            }
+
+            return allQuestions;        
+        }
+
         private GameDto? GenerateNewGame(DateTime date)
         {
             GameDto? newGame = null;
             bool invalidGame = true;
 
-            List<Questions> allQuestions = _dal.GetAllQuestions();
+            List<Questions> allQuestions = GetAllQuestionsFiltered();
             List<Questions> selectedQuestions;
 
             while(invalidGame)
