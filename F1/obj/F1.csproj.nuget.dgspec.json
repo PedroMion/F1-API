@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\F1.csproj": {}
+    "C:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\F1.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\F1.csproj": {
+    "C:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\F1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\F1.csproj",
+        "projectUniqueName": "C:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\F1.csproj",
         "projectName": "F1",
-        "projectPath": "c:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\F1.csproj",
+        "projectPath": "C:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\F1.csproj",
         "packagesPath": "C:\\Users\\Pedro\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\obj\\",
+        "outputPath": "C:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Pedro\\AppData\\Roaming\\NuGet\\NuGet.Config"

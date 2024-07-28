@@ -2,6 +2,10 @@ namespace F1.Data.DTO
 {
     public class RaceDto
     {
-        public int WinnerId { get; set; }
+        public List<int> FinalGrid { get; set; }
+        public int PolePositionId { get; set;}
+        public int FastestLapId { get; set; }
+        public int CircuitId { get; set; }
+        public string RaceDate { get; set; }
     }
 }
