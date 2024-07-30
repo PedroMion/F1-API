@@ -17,5 +17,15 @@ namespace F1.Services
         {
             return true;
         }
+
+        public Pilots? GetPilotById(int id)
+        {
+            return _dal.GetPilotById(id);
+        }
+
+        public Pilots? GetPilotByName(string name)
+        {
+            return _dal.GetPilotByName(name);
+        }
     }
 }

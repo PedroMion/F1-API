@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Qr6xoujYRRAh4Pgbq+mlPusbPBlMdptQllFqQ0bu/5D+aQdPCVo+syj82wdNU3QYOrmmwoKeXqiW1r+DnUxpmA==",
+  "dgSpecHash": "R40H0W2kTpzHLqYNaBaMMQgoSuRjAaetpJA760QGIheLtKnf7088a1Ql6FNexpjoxfTuANTMDwH2rdSbN7b29Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\F1.csproj",
+  "projectFilePath": "c:\\Users\\Pedro\\Desktop\\Programacao\\Projetos\\Formula 1\\F1-API\\F1\\F1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pedro\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Pedro\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

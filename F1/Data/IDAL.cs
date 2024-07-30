@@ -15,5 +15,9 @@ namespace F1.Data
         public Games? GetMostRecentGame();
 
         public Games SaveGame(Games game);
+
+        public Pilots? GetPilotById(int id);
+
+        public Pilots? GetPilotByName(string name);
     }
 }

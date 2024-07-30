@@ -90,5 +90,19 @@ namespace F1.Data
 
             return game;
         }
+
+        public Pilots? GetPilotById(int id)
+        {
+            Pilots? pilot = _F1Context.Pilots.FirstOrDefault(p => p.Id == id);
+
+            return pilot;
+        }
+
+        public Pilots? GetPilotByName(string name)
+        {
+            Pilots? pilot = _F1Context.Pilots.FirstOrDefault(p => p.Name.Contains(name));
+
+            return pilot;
+        }
     }
 }
