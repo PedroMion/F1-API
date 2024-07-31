@@ -10,4 +10,6 @@ Este projeto consiste em uma base de dados contendo informações sobre a compet
 - DataController: 1 endpoint, recebe informações sobre uma corrida e atualiza os dados dos pilotos considerando a corrida, quantidade de pontos, vitórias e as demais informações que necessitem atualização.
 
 ### 💻 Base de dados
-Para que este projeto fosse possível, foi necessário reunir os dados da fórmula 1.
+Para que este projeto fosse possível, foi necessário reunir os dados da fórmula 1, principalmente de pilotos, em uma base de dados contendo o máximo de informações possível. Para reunir os dados, foram utilizados alguns datasets do Kaggle em conjunto com arquivos python para ler, interpretar e limpar os dados. Além disso, muitos dados foram coletados da WikiPedia para complementar a base e possibilitar maior versatilidade nos jogos (Manualmente e via Web Scrapping). Os datasets utilizados serão listados no fim deste documento.
+
+### API
