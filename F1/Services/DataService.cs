@@ -27,5 +27,10 @@ namespace F1.Services
         {
             return _dal.GetPilotByName(name);
         }
+
+        public Pilots? CreateNewPilot(NewPilotDto pilotInformation)
+        {
+            return new Pilots();
+        }
     }
 }

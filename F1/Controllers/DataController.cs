@@ -36,16 +36,16 @@ namespace F1.Controllers
             return pilot;
         }
 
-        [HttpGet("pilot")]
-        public ActionResult<Pilots> GetPilotByName([BindRequired] string name)
+        [HttpPost("pilot")]
+        public async Task<ActionResult<Pilots>> AddNewPilot([BindRequired] NewPilotDto pilotInformation)
         { 
-            var pilot = _service.GetPilotByName(name);
+            var pilot = _service.CreateNewPilot(pilotInformation);
 
             if (pilot == null) {
-                return BadRequest("Pilot not found");
+                return UnprocessableEntity("Missing crucial information");
             }
 
-            return pilot;
+            return Created();
         }
     }
 }

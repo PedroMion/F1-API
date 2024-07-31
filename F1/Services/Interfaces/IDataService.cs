@@ -7,5 +7,7 @@ namespace F1.Services.Interfaces {
         public Pilots? GetPilotById(int id);
 
         public Pilots? GetPilotByName(string name);
+
+        public Pilots? CreateNewPilot(NewPilotDto pilotInformation);
     }
 }
