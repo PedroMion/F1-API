@@ -4,11 +4,7 @@ namespace F1.Data.DTO
     {
         public required string Name { get; set; }
 
-        public required Countries NationalityId { get; set; }
-
-        public int? SeasonId { get; set; }
-
-        public int? TeamId { get; set; }
+        public required Countries Nationality { get; set; }
 
         public bool F2_Champion { get; set; }
     }

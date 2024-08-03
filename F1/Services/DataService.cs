@@ -1,5 +1,6 @@
 using F1.Data;
 using F1.Data.DTO;
+using F1.Mappers;
 using F1.Services.Interfaces;
 
 namespace F1.Services
@@ -28,9 +29,13 @@ namespace F1.Services
             return _dal.GetPilotByName(name);
         }
 
-        public Pilots? CreateNewPilot(NewPilotDto pilotInformation)
+        public async Task<Pilots> CreateNewPilot(NewPilotDto pilotInformation)
         {
-            return new Pilots();
+            Pilots newPilot = PilotMapper.GetPilotInformationFromNewPilotDto(pilotInformation);
+
+            newPilot = await _dal.SaveNewPilotAsync(newPilot);
+            
+            return newPilot;
         }
     }
 }

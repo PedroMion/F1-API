@@ -19,5 +19,7 @@ namespace F1.Data
         public Pilots? GetPilotById(int id);
 
         public Pilots? GetPilotByName(string name);
+
+        public Task<Pilots> SaveNewPilotAsync(Pilots pilot);
     }
 }

@@ -104,5 +104,13 @@ namespace F1.Data
 
             return pilot;
         }
+
+        public async Task<Pilots> SaveNewPilotAsync(Pilots pilot)
+        {
+            var result = await _F1Context.Pilots.AddAsync(pilot);
+            _F1Context.SaveChanges();
+
+            return result.Entity;
+        }
     }
 }

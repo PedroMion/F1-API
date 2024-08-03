@@ -8,6 +8,6 @@ namespace F1.Services.Interfaces {
 
         public Pilots? GetPilotByName(string name);
 
-        public Pilots? CreateNewPilot(NewPilotDto pilotInformation);
+        public Task<Pilots> CreateNewPilot(NewPilotDto pilotInformation);
     }
 }
