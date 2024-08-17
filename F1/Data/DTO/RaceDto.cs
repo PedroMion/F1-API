@@ -6,6 +6,6 @@ namespace F1.Data.DTO
         public int PolePositionId { get; set;}
         public int FastestLapId { get; set; }
         public int CircuitId { get; set; }
-        public string RaceDate { get; set; }
+        public DateTime RaceDate { get; set; }
     }
 }

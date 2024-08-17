@@ -21,5 +21,13 @@ namespace F1.Data
         public Pilots? GetPilotByName(string name);
 
         public Task<Pilots> SaveNewPilotAsync(Pilots pilot);
+
+        public void UpdatePilot(Pilots pilot);
+
+        public Task<Seasons?> GetSeasonByDateAsync(DateTime date);
+
+        public Task<Races> SaveNewRaceAsync(Races race);
+
+        public Circuits? GetCircuitById(int id);
     }
 }

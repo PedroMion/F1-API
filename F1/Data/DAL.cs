@@ -112,5 +112,29 @@ namespace F1.Data
 
             return result.Entity;
         }
+
+        public void UpdatePilot(Pilots pilot)
+        {
+            _F1Context.Pilots.Update(pilot);
+            _F1Context.SaveChanges();
+        }
+
+        public async Task<Seasons?> GetSeasonByDateAsync(DateTime date)
+        {
+            return await _F1Context.Seasons.FirstOrDefaultAsync(x => x.Date == date);
+        }
+
+        public async Task<Races> SaveNewRaceAsync(Races race)
+        {
+            var result = await _F1Context.Races.AddAsync(race);
+            _F1Context.SaveChanges();
+
+            return result.Entity;
+        }
+
+        public Circuits? GetCircuitById(int id)
+        {
+            return _F1Context.Circuits.FirstOrDefault(c => c.Id == id);
+        }
     }
 }
