@@ -1,4 +1,5 @@
 using F1.Data;
+using F1.Data.DTO;
 using F1.Services.Interfaces;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
@@ -8,17 +9,17 @@ namespace F1.Services
 {
     public class CacheService : ICacheService
     {
-        private readonly IDAL _dal;
         private readonly IDistributedCache _distributedCache;
 
-        public CacheService(IDAL dal, IDistributedCache distributedCache)
+        public CacheService(IDistributedCache distributedCache)
         {
-            _dal = dal;
             _distributedCache = distributedCache;
         }
 
-        public async Task SaveGameInCacheAsync(Games game, string key, CancellationToken token = default)
+        public async Task SaveGameInCacheAsync(GameDto game, int id, CancellationToken token = default)
         {
+            string key = $"game-{id}";
+            
             await _distributedCache.SetStringAsync(
                 key,
                 JsonConvert.SerializeObject(game),
@@ -26,21 +27,7 @@ namespace F1.Services
             );
         }
 
-        private async Task<Games?> GetFromSqlDatabaseAndStoresInCacheAsync(int id, string key, CancellationToken token)
-        {
-            Games? gameFromDatabase = _dal.GetGameById(id);
-
-            if (gameFromDatabase == null)
-            {
-                return gameFromDatabase;
-            }
-
-            await SaveGameInCacheAsync(gameFromDatabase, key, token);
-
-            return gameFromDatabase;
-        }
-
-        public async Task<Games?> GetGameFromCacheByIdAsync(int id, CancellationToken cancellationToken = default)
+        public async Task<GameDto?> GetGameFromCacheByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             string key = $"game-{id}";
 
@@ -48,10 +35,10 @@ namespace F1.Services
 
             if (string.IsNullOrEmpty(gameJson))
             {
-                return await GetFromSqlDatabaseAndStoresInCacheAsync(id, key, cancellationToken);
+                return null;
             }
 
-            var game = JsonConvert.DeserializeObject<Games>(gameJson);
+            var game = JsonConvert.DeserializeObject<GameDto>(gameJson);
             return game;
         }
     }

@@ -7,10 +7,12 @@ namespace F1.Services
     public class GameService() : IGameService 
     {
         private readonly IDAL _dal;
+        private readonly ICacheService _cacheService;
 
-        public GameService(IDAL dal) : this()
+        public GameService(IDAL dal, ICacheService cacheService) : this()
         {
             _dal = dal;
+            _cacheService = cacheService;
         }
 
         private List<Questions> GetQuestionsFromGame(Games game)
@@ -200,6 +202,8 @@ namespace F1.Services
                 }
             }
 
+            _cacheService.SaveGameInCacheAsync(newGame, newGame.Id);
+
             return newGame;
         }
 
@@ -215,6 +219,22 @@ namespace F1.Services
             }
 
             return GenerateNewGame(date);
+        }
+
+        private async Task<GameDto?> RetrieveGameFromDatabaseAndAddToCacheAsync(int id)
+        {
+            var game = _dal.GetGameById(id);
+
+            if (game != null)
+            {
+                var mappedGame = await Task.FromResult(GameToGameDto(game));
+                
+                await _cacheService.SaveGameInCacheAsync(mappedGame, id);
+
+                return mappedGame;
+            }
+
+            return null;
         }
 
         public bool InvalidDate(String? date)
@@ -238,15 +258,16 @@ namespace F1.Services
             return Task.FromResult(game);
         }
 
-        public Task<GameDto?>? GetGameById(int id)
+        public async Task<GameDto?>? GetGameById(int id)
         {
-            var game = _dal.GetGameById(id);
+            GameDto? gameDto = await _cacheService.GetGameFromCacheByIdAsync(id);
 
-            if (game != null) {
-                return Task.FromResult(GameToGameDto(game));
+            if (gameDto != null)
+            {
+                return gameDto;
             }
 
-            return null;
+            return await RetrieveGameFromDatabaseAndAddToCacheAsync(id);
         }
     }
 }

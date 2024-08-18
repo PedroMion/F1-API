@@ -1,11 +1,12 @@
 public class Races {
+    public Races() {}
     
-    public Races(DateTime date, Circuits circuit, Seasons season, Pilots winnerPilot)
+    public Races(DateTime date, Circuits? circuit, Seasons? season, Pilots? winner_pilot)
     {
         Date = date;
         Circuit = circuit;
         Season = season;
-        Winner_Pilot = winnerPilot;
+        Winner_Pilot = winner_pilot;
     }
     
     public int Id { get; set; }

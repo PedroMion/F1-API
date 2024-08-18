@@ -136,3 +136,8 @@ C:\Users\Pedro\Desktop\Programacao\Projetos\Formula 1\F1-API\F1\obj\Debug\net8.0
 C:\Users\Pedro\Desktop\Programacao\Projetos\Formula 1\F1-API\F1\obj\Debug\net8.0\F1.pdb
 C:\Users\Pedro\Desktop\Programacao\Projetos\Formula 1\F1-API\F1\obj\Debug\net8.0\F1.genruntimeconfig.cache
 C:\Users\Pedro\Desktop\Programacao\Projetos\Formula 1\F1-API\F1\obj\Debug\net8.0\ref\F1.dll
+c:\Users\Pedro\Desktop\Programacao\Projetos\Formula 1\F1-API\F1\bin\Debug\net8.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+c:\Users\Pedro\Desktop\Programacao\Projetos\Formula 1\F1-API\F1\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+c:\Users\Pedro\Desktop\Programacao\Projetos\Formula 1\F1-API\F1\bin\Debug\net8.0\Newtonsoft.Json.dll
+c:\Users\Pedro\Desktop\Programacao\Projetos\Formula 1\F1-API\F1\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+c:\Users\Pedro\Desktop\Programacao\Projetos\Formula 1\F1-API\F1\bin\Debug\net8.0\StackExchange.Redis.dll
