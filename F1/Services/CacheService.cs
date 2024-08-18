@@ -17,7 +17,7 @@ namespace F1.Services
             _distributedCache = distributedCache;
         }
 
-        private async Task SaveGameInCacheAsync(Games game, string key, CancellationToken token)
+        public async Task SaveGameInCacheAsync(Games game, string key, CancellationToken token = default)
         {
             await _distributedCache.SetStringAsync(
                 key,
