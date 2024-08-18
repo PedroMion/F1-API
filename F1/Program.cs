@@ -18,6 +18,10 @@ builder.Services.AddDbContext<F1Context>(options => {
     options.UseSqlServer(Private.SQL_CONNECTION);
 });
 
+builder.Services.AddStackExchangeRedisCache(redisOption => {
+    redisOption.Configuration = Private.REDIS_CONNECTION;
+});
+
 builder.Services.AddCors(options =>
 {
         options.AddPolicy(Private.CORS_POLICY,
